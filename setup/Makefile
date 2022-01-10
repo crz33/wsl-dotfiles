@@ -2,7 +2,8 @@ SHELL=/bin/bash
 
 default:
 	@echo "usage: make help"
-
+base:
+	@sudo apt install -y tree
 git:
 	@mkdir -p ~/bin
 	@rm -f ~/bin/git-prompt.sh ~/bin/git-completion.bash
