@@ -10,11 +10,19 @@ git:
 	@wget -P ~/bin https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 	@wget -P ~/bin https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 python:
-	@sudo apt install -y libffi-dev libssl-dev zlib1g-dev liblzma-dev tk-dev libbz2-dev libreadline-dev libsqlite3-dev libopencv-dev build-essential git
-ifeq (,$(wildcard ~/.pyenv))
-	@git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-	@echo 'export PYENV_ROOT="$$HOME/.pyenv"' >> ~/.bashrc
-	@echo 'export PATH="$$PYENV_ROOT/bin:$$PATH"' >> ~/.bashrc
-	@echo 'eval "$$(pyenv init --path)"' >> ~/.bashrc
-	@echo 'Try: . ~/.bashrc'
-endif
+	curl https://pyenv.run | bash
+docker:
+	sudo apt install -y ca-certificates curl gnupg lsb-release
+	sudo rm -f /usr/share/keyrings/docker-archive-keyring.gpg
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+	sudo rm -f /etc/apt/sources.list.d/docker.list
+	echo "deb [arch=$$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $$(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	sudo apt update
+	sudo apt install -y docker-ce docker-ce-cli containerd.io
+	sudo service docker restart
+	sleep 1
+	sudo docker run hello-world > /dev/null
+	sudo usermod -g docker $$(whoami)
+	sudo chgrp docker /var/run/docker.sock
+	sudo service docker restart
+	@echo "*** Please, logout ***"
