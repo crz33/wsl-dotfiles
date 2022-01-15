@@ -10,6 +10,7 @@ git:
 	@wget -P ~/bin https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 	@wget -P ~/bin https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 python:
+	sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 	curl https://pyenv.run | bash
 docker:
 	sudo apt install -y ca-certificates curl gnupg lsb-release
