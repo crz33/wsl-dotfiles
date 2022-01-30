@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+docker run -d \
+    -p 5432:5432 \
+    --name ${1}-db \
+    --mount type=volume,src=${1}-vol,dst=/var/lib/postgresql/data \
+    -e POSTGRES_PASSWORD=demo \
+    -e TZ=Asia/Tokyo \
+    postgres:14
